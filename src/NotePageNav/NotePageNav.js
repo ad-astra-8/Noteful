@@ -1,26 +1,32 @@
 import React from 'react'
-import Note from '../Note/Note'
-import './NotePageMain.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import CircleButton from '../CircleButton/CircleButton'
+import './NotePageNav.css'
 
-export default function NotePageMain(props) {
+export default function NotePageNav(props) {
   return (
-    <section className='NotePageMain'>
-      <Note
-        id={props.note.id}
-        name={props.note.name}
-        modified={props.note.modified}
-      />
-      <div className='NotePageMain__content'>
-        {props.note.content.split(/\n \r|\n/).map((para, i) =>
-          <p key={i}>{para}</p>
-        )}
-      </div>
-    </section>
+    <div className='NotePageNav'>
+      <CircleButton
+        tag='button'
+        role='link'
+        onClick={() => props.history.goBack()}
+        className='NotePageNav__back-button'
+      >
+        <FontAwesomeIcon icon='chevron-left' />
+        <br />
+        Back
+      </CircleButton>
+      {props.folder && (
+        <h3 className='NotePageNav__folder-name'>
+          {props.folder.name}
+        </h3>
+      )}
+    </div>
   )
 }
 
-NotePageMain.defaultProps = {
-  note: {
-    content: '',
+NotePageNav.defaultProps = {
+  history: {
+    goBack: () => {}
   }
 }

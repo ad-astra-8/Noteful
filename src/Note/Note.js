@@ -1,7 +1,6 @@
-  
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { format } from 'date-fns'
+// import { format } from 'date-fns'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './Note.css'
 
@@ -22,9 +21,9 @@ export default function Note(props) {
         <div className='Note__dates-modified'>
           Modified
           {' '}
-          <span className='Date'>
+          {/* <span className='Date'>
             {format(props.modified, 'Do MMM YYYY')}
-          </span>
+          </span> */}
         </div>
       </div>
     </div>
