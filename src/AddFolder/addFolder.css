@@ -1,0 +1,12 @@
+.addfolder {
+    display: flex;
+    flex-direction: column;
+}
+.addfolder__button {
+    display: inline;
+    margin: 10px;
+}
+
+.folder-name {
+    font-size: 18px;
+}

@@ -1,10 +1,13 @@
-import React, {Component} from 'react';
-import {Route, Link} from 'react-router-dom';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import React, { Component } from 'react';
+import { Route, Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import NoteListNav from '../NoteListNav/NoteListNav';
 import NotePageNav from '../NotePageNav/NotePageNav';
 import NoteListMain from '../NoteListMain/NoteListMain';
 import NotePageMain from '../NotePageMain/NotePageMain';
+import AddFolder from '../AddFolder/AddFolder';
+import AddNote from '../AddNote/AddNote';
+import NoteError from '../NoteError';
 import ApiContext from '../ApiContext';
 import config from '../config';
 import './App.css';
@@ -14,6 +17,8 @@ class App extends Component {
         notes: [],
         folders: []
     };
+
+
 
     componentDidMount() {
         Promise.all([
@@ -29,10 +34,10 @@ class App extends Component {
                 return Promise.all([notesRes.json(), foldersRes.json()]);
             })
             .then(([notes, folders]) => {
-                this.setState({notes, folders});
+                this.setState({ notes, folders });
             })
             .catch(error => {
-                console.error({error});
+                console.error({ error });
             });
     }
 
@@ -42,36 +47,68 @@ class App extends Component {
         });
     };
 
+    handleAddFolder = folder => {
+        this.setState({
+            folders: [...this.state.folders, folder],
+        })
+    }
+
+    handleAddNote = note => {
+        this.setState({
+            notes: [...this.state.notes, note],
+        })
+    }
+
     renderNavRoutes() {
         return (
             <>
-                {['/', '/folder/:folderId'].map(path => (
-                    <Route
-                        exact
-                        key={path}
-                        path={path}
-                        component={NoteListNav}
-                    />
-                ))}
-                <Route path="/note/:noteId" component={NotePageNav} />
-                <Route path="/add-folder" component={NotePageNav} />
-                <Route path="/add-note" component={NotePageNav} />
+                <NoteError>
+                    {['/', '/folder/:folderId'].map(path => (
+                        <Route
+                            exact
+                            key={path}
+                            path={path}
+                            component={NoteListNav}
+                        />
+                    ))}
+                </NoteError>
+
+                <NoteError>
+                    <Route path="/note/:noteId" component={NotePageNav} />
+                    <Route path="/add-folder" component={NotePageNav} />
+                    <Route path="/add-note" component={NotePageNav} />
+                </NoteError>
             </>
         );
     }
 
     renderMainRoutes() {
         return (
+
             <>
-                {['/', '/folder/:folderId'].map(path => (
-                    <Route
-                        exact
-                        key={path}
-                        path={path}
-                        component={NoteListMain}
-                    />
-                ))}
-                <Route path="/note/:noteId" component={NotePageMain} />
+                <NoteError>
+                    {['/', '/folder/:folderId'].map(path => (
+                        <Route
+                            exact
+                            key={path}
+                            path={path}
+                            component={NoteListMain}
+                        />
+                    ))}
+                </NoteError>
+
+                <NoteError>
+                    <Route path="/note/:noteId" component={NotePageMain} />
+                </NoteError>
+
+                <NoteError>
+                    <Route path="/add-folder" component={AddFolder} />
+                </NoteError>
+
+                <NoteError>
+                    <Route path="/add-note" component={AddNote} />
+                </NoteError>
+
             </>
         );
     }
@@ -80,7 +117,9 @@ class App extends Component {
         const value = {
             notes: this.state.notes,
             folders: this.state.folders,
-            deleteNote: this.handleDeleteNote
+            deleteNote: this.handleDeleteNote,
+            addFolder: this.handleAddFolder,
+            addNote: this.handleAddNote,
         };
         return (
             <ApiContext.Provider value={value}>

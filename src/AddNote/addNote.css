@@ -1,0 +1,9 @@
+.addfolder__form {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+.addnote__button {
+    display: inline;
+    margin: 10px;
+}
