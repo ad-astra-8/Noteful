@@ -96,7 +96,7 @@ class AddNote extends React.Component {
 	render() {
     const folderList = this.context.folders.map (folder => {
       return (
-      <option key= {folder.id} value={folder.id}>{folder.folder_name}{folder.name}</option>
+	  <option key= {folder.id} value={folder.id}>{folder.folder_name}{folder.name}</option>
       )
     })
 

@@ -4,9 +4,8 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ApiContext from '../ApiContext'
 import config from '../config'
-import PropTypes from 'prop-types';
 import './Note.css'
-import AddFolder from '../AddFolder/AddFolder'
+import PropTypes from 'prop-types';
 
 export default class Note extends React.Component {
   static defaultProps ={
@@ -17,7 +16,6 @@ export default class Note extends React.Component {
   handleClickDelete = e => {
     e.preventDefault()
     const noteId = this.props.id
-
     fetch(`${config.API_ENDPOINT}/notes/${noteId}`, {
       method: 'DELETE',
       headers: {
@@ -27,7 +25,6 @@ export default class Note extends React.Component {
       .then(res => {
         if (!res.ok)
           return res.json().then(e => Promise.reject(e))
-        return res.json()
       })
       .then(() => {
         this.context.deleteNote(noteId)
@@ -40,15 +37,13 @@ export default class Note extends React.Component {
   }
 
   render() {
-    const { name, title, id, modified } = this.props;
-    // console.log(modified);
+    const { name, id, date_modified } = this.props
+
     return (
       <div className='Note'>
         <h2 className='Note__title'>
           <Link to={`/note/${id}`}>
             {name}
-            {title}
-            
           </Link>
         </h2>
         <button
@@ -65,8 +60,8 @@ export default class Note extends React.Component {
             Modified
             {' '}
             <span className='Date'>
-              {/* {format(modified, 'Do MMM YYYY')} */}
-              {modified}
+              {/* {format(date_modified, 'Do MMM YYYY')} */}
+              {date_modified}
             </span>
           </div>
         </div>
@@ -74,7 +69,6 @@ export default class Note extends React.Component {
     )
   }
 }
-
 
 Note.propTypes = {
 	modified: PropTypes.string,
