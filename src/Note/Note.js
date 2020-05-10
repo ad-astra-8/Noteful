@@ -5,8 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ApiContext from '../ApiContext'
 import config from '../config'
 import PropTypes from 'prop-types';
-
 import './Note.css'
+import AddFolder from '../AddFolder/AddFolder'
 
 export default class Note extends React.Component {
   static defaultProps ={
@@ -40,13 +40,15 @@ export default class Note extends React.Component {
   }
 
   render() {
-    const { name, id, modified } = this.props
-    console.log(modified);
+    const { name, title, id, modified } = this.props;
+    // console.log(modified);
     return (
       <div className='Note'>
         <h2 className='Note__title'>
           <Link to={`/note/${id}`}>
             {name}
+            {title}
+            
           </Link>
         </h2>
         <button

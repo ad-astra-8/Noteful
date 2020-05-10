@@ -23,6 +23,7 @@ export default class NoteListNav extends React.Component {
                 <span className='NoteListNav__num-notes'>
                   {countNotesForFolder(notes, folder.id)}
                 </span>
+                {folder.folder_name}
                 {folder.name}
               </NavLink>
             </li>
