@@ -22,18 +22,18 @@ class AddNote extends React.Component {
 			}
 		}
 	}
-
-	static contextType = ApiContext;
 	
-  handleNoteSubmit = (event) => {
-		event.preventDefault();
+	static contextType = ApiContext;
+
+  handleNoteSubmit = (e) => {
+		e.preventDefault();
 
 		const newNote = JSON.stringify({
-      title: this.state.name.value,
+      name: this.state.name.value,
       folder_id: this.state.folderId.value,
-      content: this.state.content.value,
-    })
-
+	  content: this.state.content.value
+	})
+	
 		fetch(`${config.API_ENDPOINT}/notes`,
 		{
 			method: 'POST',
@@ -45,10 +45,15 @@ class AddNote extends React.Component {
 				return res.json().then(e => Promise.reject(e))
 			return res.json()
 		})
-		.then(response => this.context.addNote(response))
-		.then(
+		.then(response => {
+			// console.log(response)
+			this.context.addNote(response)
+		})
+		.then( data => { 
+			// console.log(data)
 			this.props.history.push('/')
-		)
+		})
+		  
 		.catch(error => {
 			alert(error.message)
 		})
