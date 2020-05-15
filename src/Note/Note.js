@@ -55,10 +55,10 @@ export default class Note extends React.Component {
 
   render() {
     const { name, id, date_modified } = this.props
-console.log(date_modified);
+// console.log(date_modified);
 let date = Date.parse(date_modified);
 let unixtimedate= date.toLocaleString("en-US").replace(/,/g, "");
-console.log(unixtimedate)
+// console.log(unixtimedate)
 
     return (
       <div className='Note'>
