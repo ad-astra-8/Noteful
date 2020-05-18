@@ -3,7 +3,7 @@ import config from '../config';
 import ApiContext from '../ApiContext';
 import ValidationError from '../ValidationError';
 import PropTypes from 'prop-types';
-
+import './addNote.css'; 
 class AddNote extends React.Component {
 	constructor(props) {
 		super(props);
@@ -19,7 +19,8 @@ class AddNote extends React.Component {
 			content: {
 				value: '',
 				touched: false
-			}
+			},
+
 		}
 	}
 
@@ -31,7 +32,8 @@ class AddNote extends React.Component {
 		const newNote = JSON.stringify({
 			name: this.state.name.value,
 			folderId: this.state.folderId.value,
-			content: this.state.content.value
+			content: this.state.content.value,
+			modified: new Date(),
 		})
 
 		fetch(`${config.API_ENDPOINT}/notes`,
@@ -47,7 +49,7 @@ class AddNote extends React.Component {
 				return res.json()
 			})
 			.then(response => {
-				console.log(response)
+				// console.log(response)
 				this.context.addNote(response)
 				this.props.history.push('/', response)
 
@@ -131,9 +133,9 @@ class AddNote extends React.Component {
 					id="folderId"
 					name="folderId"
 					onChange={e => this.updateFolderId(e.target.value)}
-					value={this.state.folderId}
+					value={this.state.folderId.value}
 				>
-					<option disabled>Select Folder</option>
+					<option value={null}>Select Folder</option>
 					{folderList}
 				</select>
 				<button type="submit"

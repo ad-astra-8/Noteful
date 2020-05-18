@@ -45,13 +45,13 @@ class App extends Component {
 			});
 	};
 
-	handleAddFolder = (folder) => {
+	handleAddFolder = folder => {
 	this.setState({
 		folders: [...this.state.folders, folder]
 	});
 	}
     
-	handleAddNote = (note) => {
+	handleAddNote = note => {
 		// console.log(note)
 			this.setState({
 					notes: [...this.state.notes, note]

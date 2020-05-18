@@ -7,3 +7,7 @@
     display: inline;
     margin: 10px;
 }
+
+label {
+    color: grey;
+}

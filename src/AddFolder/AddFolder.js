@@ -3,6 +3,7 @@ import config from '../config';
 import ApiContext from '../ApiContext';
 import ValidationError from '../ValidationError'; // validating user input
 import PropTypes from 'prop-types';
+import './addFolder.css';
 
 class AddFolder extends React.Component {
 	constructor(props) {
@@ -78,7 +79,7 @@ class AddFolder extends React.Component {
 }
 export default AddFolder;
 
-AddFolder.propTypes = {
+AddFolder.propType = {
 name : PropTypes.string.isRequired,	
 addFolder: PropTypes.func
 }

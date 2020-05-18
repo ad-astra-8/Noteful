@@ -21,7 +21,14 @@ export default class NotePageNav extends React.Component {
     const { notes, folders, } = this.context
     const { noteId } = this.props.match.params
     const note = findNote(notes, noteId) || {}
-    const folder = findFolder(folders, note.folder_id)
+    const folder = findFolder(folders, note.folderId)
+
+    // console.log(note)
+    // console.log(findNote)
+    // console.log(folder)
+    // console.log(findFolder)
+    // console.log(this.context)
+    // console.log(this.props.match.params)
     return (
       <div className='NotePageNav'>
         <CircleButton
@@ -44,8 +51,11 @@ export default class NotePageNav extends React.Component {
   }
 }
 
-NotePageNav.propTypes = {
-	notes: PropTypes.array.isRequired,
-  folders: PropTypes.array.isRequired,
-  noteId: PropTypes.string.isRequired
-	}
+// NotePageNav.propTypes = {
+// 	notes: PropTypes.array.isRequired,
+//   folders: PropTypes.array.isRequired,
+//   noteId: PropTypes.string.isRequired
+// 	}
+NotePageNav.propType = {
+  push: PropTypes.func.isRequired
+};
