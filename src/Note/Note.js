@@ -17,7 +17,7 @@ export default class Note extends React.Component {
   handleClickDelete = e => {
     e.preventDefault()
     const noteId = this.props.id
-    fetch(`${config.API_ENDPOINT}/notes/${noteId}`, {
+    fetch(`${config.NOTES_ENDPOINT}/${noteId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'

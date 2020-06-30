@@ -36,7 +36,7 @@ class AddNote extends React.Component {
 			modified: new Date(),
 		})
 
-		fetch(`${config.API_ENDPOINT}/notes`,
+		fetch(`${config.NOTES_ENDPOINT}`,
 			{
 				method: 'POST',
 				headers: { 'content-type': 'application/json' },
