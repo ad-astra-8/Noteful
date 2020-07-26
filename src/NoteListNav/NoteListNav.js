@@ -10,11 +10,12 @@ export default class NoteListNav extends React.Component {
   static contextType = ApiContext;
 
   render() {
-    const { folders=[], notes=[] } = this.context
+    const { folders=[], notes=[] } = this.context;    
+    // console.log(folders);
     return (
       <div className='NoteListNav'>
         <ul className='NoteListNav__list'>
-          {folders.map(folder =>
+        {folders.map((folder) => (
             <li key={folder.id}>
               <NavLink
                 className='NoteListNav__folder-link'
@@ -27,7 +28,7 @@ export default class NoteListNav extends React.Component {
                 {folder.name}
               </NavLink>
             </li>
-          )}
+           ))}
         </ul>
         <div className='NoteListNav__button-wrapper'>
           <CircleButton
