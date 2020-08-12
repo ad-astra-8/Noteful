@@ -12,7 +12,7 @@ class AddNote extends React.Component {
 				value: '',
 				touched: false
 			},
-			folderId: {
+			id_folder: {
 				value: '',
 				touched: false
 			},
@@ -38,7 +38,7 @@ class AddNote extends React.Component {
 		const newNote = {
 			name: e.target['note-name'].value,
 			content: e.target['note-content'].value,
-			folderId: e.target['note-folderId'].value,
+			id_folder: e.target['note-id_folder'].value,
 			modified: new Date(),
 		  }
 		fetch(`${config.NOTES_ENDPOINT}`,
@@ -56,7 +56,7 @@ class AddNote extends React.Component {
 			.then(note => {
 				console.log(note)
 				this.context.addNote(note)
-				this.props.history.push(`/folder/${note.folderId}`)
+				this.props.history.push(`/folder/${note.id_folder}`)
 
 			})
 			// .then(data => {
@@ -69,10 +69,10 @@ class AddNote extends React.Component {
 			})
 	}
 
-	updateFolderId = (folderId) => {
+	updateFolderId = (id_folder) => {
 		this.setState({
-			folderId: {
-				value: folderId,
+			id_folder: {
+				value: id_folder,
 				touched: true
 			}
 		})
@@ -104,7 +104,7 @@ class AddNote extends React.Component {
 	}
 
 	validateFolderSelect() {
-		const folderIsSelected = this.state.folderId.value;
+		const folderIsSelected = this.state.id_folder.value;
 		return !folderIsSelected;
 	}
 
@@ -136,9 +136,9 @@ class AddNote extends React.Component {
 				<label htmlFor="folders">Save in *</label>
 				<select
 					id="folderId"
-					name="note-folderId"
+					name="note-id_folder"
 					onChange={e => this.updateFolderId(e.target.value)}
-					value={this.state.folderId.value}
+					value={this.state.id_folder.value}
 				>
 					<option value={null}>Select Folder</option>
 					{folderList}
