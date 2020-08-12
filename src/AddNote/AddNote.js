@@ -21,7 +21,7 @@ class AddNote extends React.Component {
 				touched: false
 			},
 
-		}
+		};
 	}
 
 	static contextType = ApiContext;
@@ -29,18 +29,23 @@ class AddNote extends React.Component {
 	handleNoteSubmit = (e) => {
 		e.preventDefault();
 
-		const newNote = JSON.stringify({
-			name: this.state.name.value,
-			folderId: this.state.folderId.value,
-			content: this.state.content.value,
+		// const newNote = {
+		// 	name: this.state.name.value,
+		// 	folderId: this.state.folderId.value,
+		// 	content: this.state.content.value,
+		// 	modified: new Date(),
+		// }
+		const newNote = {
+			name: e.target['note-name'].value,
+			content: e.target['note-content'].value,
+			folderId: e.target['note-folderId'].value,
 			modified: new Date(),
-		})
-
+		  }
 		fetch(`${config.NOTES_ENDPOINT}`,
 			{
 				method: 'POST',
 				headers: { 'content-type': 'application/json' },
-				body: newNote
+				body: JSON.stringify(newNote),
 			})
 
 			.then(res => {
@@ -48,10 +53,10 @@ class AddNote extends React.Component {
 					return res.json().then(e => Promise.reject(e))
 				return res.json()
 			})
-			.then(response => {
-				// console.log(response)
-				this.context.addNote(response)
-				this.props.history.push('/', response)
+			.then(note => {
+				console.log(note)
+				this.context.addNote(note)
+				this.props.history.push(`/folder/${note.folderId}`)
 
 			})
 			// .then(data => {
@@ -60,7 +65,7 @@ class AddNote extends React.Component {
 			// })
 
 			.catch(error => {
-				alert(error.message)
+				console.log(error.message)
 			})
 	}
 
@@ -122,16 +127,16 @@ class AddNote extends React.Component {
 				>
 				</input>
 				{this.state.name.touched && (<ValidationError message={this.validateName()} />)}
-				<label htmlFor="content">Content</label>
-				<textarea id="content"
-					name="content"
+				<label htmlFor="note-content">Content</label>
+				<textarea id="note-content"
+					name="note-content"
 					onChange={e => this.updateContent(e.target.value)}
 					defaultValue=""
 				></textarea>
 				<label htmlFor="folders">Save in *</label>
 				<select
 					id="folderId"
-					name="folderId"
+					name="note-folderId"
 					onChange={e => this.updateFolderId(e.target.value)}
 					value={this.state.folderId.value}
 				>
