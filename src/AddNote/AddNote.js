@@ -135,7 +135,7 @@ class AddNote extends React.Component {
 				></textarea>
 				<label htmlFor="folders">Save in *</label>
 				<select
-					id="folderId"
+					id="id_folder"
 					name="note-id_folder"
 					onChange={e => this.updateFolderId(e.target.value)}
 					value={this.state.id_folder.value}
