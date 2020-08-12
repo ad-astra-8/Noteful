@@ -60,7 +60,10 @@ export default class Note extends React.Component {
             Date modified on
             {' '}
             <span className='Date'>
-              {format(parseISO(modified), 'MMMM d, yyyy h:mm a', { awareOfUnicodeTokens: true })}
+              {/* {format(parseISO(modified), 'MMMM d, yyyy h:mm a', { awareOfUnicodeTokens: true })} */}
+              {/* {format(parseISO(modified), 'Do MMM yyyy', { awareOfUnicodeTokens: true })} */}
+              {modified}
+
               </span>
           </div>
         </div>
