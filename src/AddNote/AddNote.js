@@ -29,12 +29,6 @@ class AddNote extends React.Component {
 	handleNoteSubmit = (e) => {
 		e.preventDefault();
 
-		// const newNote = {
-		// 	name: this.state.name.value,
-		// 	folderId: this.state.folderId.value,
-		// 	content: this.state.content.value,
-		// 	modified: new Date(),
-		// }
 		const newNote = {
 			name: e.target['note-name'].value,
 			content: e.target['note-content'].value,

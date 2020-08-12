@@ -19,11 +19,6 @@ class AddFolder extends React.Component {
 	static contextType = ApiContext; // used to avoid prop drilling
 	
   handleFolderFormSubmit = (event) => {
-		// event.preventDefault();
-
-		// const folder = JSON.stringify({
-		// 	folder_name: this.state.name.value
-		// })
 		event.preventDefault()
 		const folder = {
 		  name: event.target['folder-name'].value
