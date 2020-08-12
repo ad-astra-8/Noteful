@@ -19,29 +19,34 @@ class AddFolder extends React.Component {
 	static contextType = ApiContext; // used to avoid prop drilling
 	
   handleFolderFormSubmit = (event) => {
-		event.preventDefault();
+		// event.preventDefault();
 
-		const newFolder = JSON.stringify({
-			folder_name: this.state.name.value
-		})
+		// const folder = JSON.stringify({
+		// 	folder_name: this.state.name.value
+		// })
+		event.preventDefault()
+		const folder = {
+		  name: event.target['folder-name'].value
+		}
 
 		fetch(`${config.FOLDERS_ENDPOINT}`,
 		{
 			method: 'POST',
 			headers: { 'content-type': 'application/json' },
-			body: newFolder
+			body: JSON.stringify(folder),
 		})
 		.then(res => {
 			if (!res.ok)
 				return res.json().then(e => Promise.reject(e))
 			return res.json()
 		})
-		.then(response => this.context.addFolder(response))
+		.then(folder => 
+			this.context.addFolder(folder))
 		.then(
-			this.props.history.push('/')
+			this.props.history.push(`/folder/${folder.id}`)
 		)
 		.catch(error => {
-			alert(error.message)
+			console.log(error.message)
 		})
 	}
 	
